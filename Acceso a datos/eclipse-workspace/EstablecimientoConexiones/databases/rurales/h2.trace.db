@@ -1,0 +1,55 @@
+2019-01-02 07:12:35 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna  no encontrada
+Column  not found [42122-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3148)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3247)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:310)
+	at rurales.Main.showTables(Main.java:486)
+	at rurales.Main.main(Main.java:146)
+2019-01-02 07:12:44 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna  no encontrada
+Column  not found [42122-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3148)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3247)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:310)
+	at rurales.Main.showTables(Main.java:486)
+	at rurales.Main.main(Main.java:146)
+2019-01-02 07:13:39 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna  no encontrada
+Column  not found [42122-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3148)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3247)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:310)
+	at rurales.Main.showTables(Main.java:486)
+	at rurales.Main.main(Main.java:146)
+2019-01-02 07:14:05 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: Columna  no encontrada
+Column  not found [42122-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.jdbc.JdbcResultSet.getColumnIndex(JdbcResultSet.java:3148)
+	at org.h2.jdbc.JdbcResultSet.get(JdbcResultSet.java:3247)
+	at org.h2.jdbc.JdbcResultSet.getString(JdbcResultSet.java:310)
+	at rurales.Main.showTables(Main.java:486)
+	at rurales.Main.main(Main.java:146)
+2019-01-02 07:56:21 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLException: El conjunto de resultados NO es scrollable y no puede ser reseteada. You may need to use conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ..).
+The result set is not scrollable and can not be reset. You may need to use conn.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ..). [90128-197]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:357)
+	at org.h2.message.DbException.get(DbException.java:179)
+	at org.h2.message.DbException.get(DbException.java:155)
+	at org.h2.message.DbException.get(DbException.java:144)
+	at org.h2.jdbc.JdbcResultSet.resetResult(JdbcResultSet.java:3282)
+	at org.h2.jdbc.JdbcResultSet.beforeFirst(JdbcResultSet.java:2751)
+	at rurales.Main.showTables(Main.java:505)
+	at rurales.Main.main(Main.java:147)

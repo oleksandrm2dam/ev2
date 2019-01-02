@@ -1,0 +1,35 @@
+CREATE TABLE apartments (
+id INT NOT NULL PRIMARY KEY,
+name VARCHAR(60),
+address VARCHAR(60),
+phoneNumber VARCHAR(15)
+);
+
+CREATE TABLE rooms (
+id INT PRIMARY KEY NOT NULL,
+apartmentId INT NOT NULL REFERENCES apartments(id),
+type VARCHAR(15),
+hasBathroom BOOLEAN,
+price DECIMAL(4,2)
+);
+
+INSERT INTO apartments VALUES (1, 'Apartamento1', 'Calle1', '917851121');
+INSERT INTO apartments VALUES (2, 'Apartamento2', 'Calle2', '622087555');
+INSERT INTO apartments VALUES (3, 'Apartamento3', 'Calle3', '915443212');
+INSERT INTO apartments VALUES (4, 'Apartamento4', 'Calle4', '917852323');
+INSERT INTO apartments VALUES (5, 'Apartamento5', 'Calle5', '915554443');
+
+INSERT INTO rooms VALUES (1, 1, 'single', false, 75.99);
+INSERT INTO rooms VALUES (2, 1, 'double', false, 25.00);
+INSERT INTO rooms VALUES (3, 1, 'double', false, 34.99);
+INSERT INTO rooms VALUES (4, 2, 'triple', false, 20.35);
+INSERT INTO rooms VALUES (5, 2, 'single', true, 72.25);
+INSERT INTO rooms VALUES (6, 3, 'triple', true, 35.50);
+INSERT INTO rooms VALUES (7, 3, 'single', false, 99.99);
+INSERT INTO rooms VALUES (8, 3, 'single', false, 66.00);
+INSERT INTO rooms VALUES (9, 4, 'double', false, 50.55);
+INSERT INTO rooms VALUES (10, 4, 'double', true, 49.95);
+INSERT INTO rooms VALUES (11, 4, 'double', true, 75.99);
+INSERT INTO rooms VALUES (12, 4, 'single', false, 55.00);
+INSERT INTO rooms VALUES (13, 5, 'triple', false, 17.00);
+INSERT INTO rooms VALUES (14, 5, 'single', true, 20.99);
