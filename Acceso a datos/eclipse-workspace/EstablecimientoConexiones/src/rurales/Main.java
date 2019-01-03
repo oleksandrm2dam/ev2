@@ -5,6 +5,7 @@ import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -152,7 +153,7 @@ public class Main {
 						System.out.println("Option not valid.");
 						break;
 				}
-			} while(!answ.equals("9"));
+			} while(!answ.equals("10"));
 			
 			scanner.close();
 			connection.close();
@@ -184,7 +185,7 @@ public class Main {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setFloat(1, price);
 			ResultSet rs = ps.executeQuery();
-			
+			printMetaData(rs);
 			while(rs.next()) {
 				output.add(new Room(
 						rs.getString("type"), 
@@ -439,14 +440,14 @@ public class Main {
 					System.out.println(current.toString());
 				}
 				break;
-			case "9":
+			case "10":
 				System.out.println("BYE!");
 				break;
 			default:
 				System.out.println("Option not valid.");
 				break;	
 			}
-		} while (!answ.equals("9"));
+		} while (!answ.equals("10"));
 		db.close();
 		scanner.close();
 	}
@@ -532,6 +533,51 @@ public class Main {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	private static void printMetaData(ResultSet rs) {
+		System.out.println("-METADATA-");
+		try {
+			ResultSetMetaData rsmd = rs.getMetaData();
+			
+			int colCount = rsmd.getColumnCount();
+			
+			System.out.println("Columns (" + colCount +  "): ");
+			for(int i = 1; i <= colCount; ++i) {
+				System.out.print(rsmd.getColumnName(i));
+				System.out.print(" (");
+				System.out.print(rsmd.getColumnTypeName(i));
+				System.out.print(") (");
+				System.out.print(rsmd.getTableName(i));
+				System.out.print(") (");
+				switch(rsmd.isNullable(i)) {
+					case 0:
+						System.out.print("NOT NULL");
+						break;
+					case 1:
+						System.out.print("NULL");
+						break;
+					default:
+						System.out.print("UKWN NULL");
+						break;
+				}
+				System.out.print(") (");
+				if(rsmd.isReadOnly(i)) {
+					System.out.print("READ ONLY");
+				} else {
+					System.out.print("READ/WRITE");
+				}
+				if(rsmd.isSigned(i)) {
+					System.out.print(") (");
+					System.out.print("POSITIVE/NEGATIVE");
+				} 
+				System.out.println(")");
+			}	
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println("-END OF METADATA-");
 	}
 
 }
