@@ -206,6 +206,7 @@ public class Main {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, name);
 			ResultSet rs = ps.executeQuery();
+			printMetaData(rs);
 			if(rs.next()) {
 				return rs.getString(1);
 			}
@@ -222,7 +223,7 @@ public class Main {
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			
+			printMetaData(rs);
 			while(rs.next()) {
 				output.add(new Apartment(
 						rs.getString(2),
@@ -246,7 +247,7 @@ public class Main {
 			ps.setString(1, type);
 			ps.setString(2, name);
 			ResultSet rs = ps.executeQuery();
-			
+			printMetaData(rs);
 			if(rs.next()) {
 				return(rs.getInt(1));
 			}
@@ -262,7 +263,7 @@ public class Main {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ps.setString(1, name);
 			ResultSet rs = ps.executeQuery();
-			
+			printMetaData(rs);
 			if(rs.next()) {
 				return(rs.getString(1));
 			}
@@ -278,7 +279,7 @@ public class Main {
 		try {
 			PreparedStatement ps = connection.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
-			
+			printMetaData(rs);
 			while(rs.next()) {
 				output.add(new Apartment(
 						rs.getString(2),
