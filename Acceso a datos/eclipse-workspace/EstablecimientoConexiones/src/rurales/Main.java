@@ -679,8 +679,9 @@ public class Main {
 		
 		System.out.println("Current apartment: ");
 		try {
-			Statement statement = connection.createStatement();
-			ResultSet rs = statement.executeQuery("SELECT * FROM apartments WHERE id = " + id);
+			PreparedStatement ps = connection.prepareStatement("SELECT * FROM apartments WHERE id = ?");
+			ps.setString(1, id);
+			ResultSet rs = ps.executeQuery();
 			if(rs.next()) {
 				System.out.println("Name: " + rs.getString(1));
 				System.out.println("Address: " + rs.getString(2));
@@ -702,15 +703,15 @@ public class Main {
 		System.out.println("Type the apartment's new phone number:");
 		phoneNumber = scanner.nextLine();
 		
-		String sql = "UPDATE apartments SET " 
-				+ "name = '" + name + "', "
-				+ "address = '" + address + "', "
-				+ "phoneNumber = '" + phoneNumber + "'"
-				+ "WHERE id = " + id;
+		String sql = "UPDATE apartments SET name = ?, address = ?, phoneNumber = ? WHERE id = ?";
 		
 		try {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate(sql);
+			PreparedStatement ps = connection.prepareStatement(sql);
+			ps.setString(1, name);
+			ps.setString(2, address);
+			ps.setString(3, phoneNumber);
+			ps.setInt(4, Integer.parseInt(id));
+			ps.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
