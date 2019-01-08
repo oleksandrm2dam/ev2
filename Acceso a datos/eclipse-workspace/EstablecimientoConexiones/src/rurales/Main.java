@@ -7,6 +7,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -147,13 +148,25 @@ public class Main {
 						showTables();
 						break;
 					case "10":
-						System.out.println("BYE!");
+						addApartment();
+						break;
+					case "11":
+						addRoomToApartment();
+						break;
+					case "12":
+						removeRoomFromApartment();
+						break;
+					case "13":
+						editApartment();
 						break;	
+					case "14":
+						System.out.println("BYE!");
+						break;
 					default:
 						System.out.println("Option not valid.");
 						break;
 				}
-			} while(!answ.equals("10"));
+			} while(!answ.equals("14"));
 			
 			scanner.close();
 			connection.close();
@@ -174,7 +187,11 @@ public class Main {
 		menu += "7) Get the address of an aparment.\n";
 		menu += "8) Get all the apartments.\n";
 		menu += "9) Show all tables in the database.\n";
-		menu += "10) EXIT.\n";
+		menu += "10) Add an apartment.\n";
+		menu += "11) Add a room to an existing apartment.\n";
+		menu += "12) Remove a room from an apartment.\n";
+		menu += "13) Edit an apartment.\n";
+		menu += "14) EXIT.\n";
 		System.out.println(menu);
 	}
 	
@@ -580,5 +597,124 @@ public class Main {
 		}
 		System.out.println("-END OF METADATA-");
 	}
+	// FIN METADATA
+	
+	// DML
+	private static void addApartment() {
+		String id, name, address, phoneNumber;
+		
+		System.out.println("Type the id:");
+		id = scanner.nextLine();
+		System.out.println("Type the name:");
+		name = scanner.nextLine();
+		System.out.println("Type the address:");
+		address = scanner.nextLine();
+		System.out.println("Type the phone number:");
+		phoneNumber = scanner.nextLine();
+		
+		String sql = "INSERT INTO apartments VALUES (" 
+				+ id + ", '"
+				+ name + "', '"
+				+ address + "', '"
+				+ phoneNumber
+				+ "')";
+		
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static void addRoomToApartment() {
+		String id, apartmentId, type, hasBathroom, price;
+		
+		System.out.println("Type the id:");
+		id = scanner.nextLine();
+		System.out.println("Type the apartment's id:");
+		apartmentId = scanner.nextLine();
+		System.out.println("Type the type:");
+		type = scanner.nextLine();
+		System.out.println("Does the room have a bathroom? (true/false):");
+		hasBathroom = scanner.nextLine();
+		System.out.println("Type the price:");
+		price = scanner.nextLine();
+		
+		String sql = "INSERT INTO rooms VALUES (" 
+				+ id + ", "
+				+ apartmentId + ", '"
+				+ type + "', "
+				+ hasBathroom + ", "
+				+ price
+				+ ")";
+		
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
+	private static void removeRoomFromApartment() {
+		System.out.println("Type the room's id:");
+		String id = scanner.nextLine();
+		
+		String sql = "DELETE FROM rooms WHERE id = " + id;
+		
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static void editApartment() {
+		String id, name, address, phoneNumber;
+		
+		System.out.println("Type the apartment's id:");
+		id = scanner.nextLine();
+		
+		System.out.println("Current apartment: ");
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery("SELECT * FROM apartments WHERE id = " + id);
+			if(rs.next()) {
+				System.out.println("Name: " + rs.getString(1));
+				System.out.println("Address: " + rs.getString(2));
+				System.out.println("Phone number: " + rs.getString(3));
+			} else {
+				System.out.println("Apartment not found.");
+				return;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("Type the apartment's new name:");
+		name = scanner.nextLine();
+		
+		System.out.println("Type the apartment's new address:");
+		address = scanner.nextLine();
+		
+		System.out.println("Type the apartment's new phone number:");
+		phoneNumber = scanner.nextLine();
+		
+		String sql = "UPDATE apartments SET " 
+				+ "name = '" + name + "', "
+				+ "address = '" + address + "', "
+				+ "phoneNumber = '" + phoneNumber + "'"
+				+ "WHERE id = " + id;
+		
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	// FIN DML
+	
 }
