@@ -16,7 +16,7 @@ public class Filosofo implements Runnable {
 	public void run() {
 		while(true) {
 			if(gp.darPalillos(numFilosofo)) {
-				System.out.println("Filósofo " + numFilosofo + " comiendo");
+				System.out.println("Filósofo " + numFilosofo + " COMIENDO");
 				try {
 					Thread.sleep(new Random().nextInt(4000) + 1000);
 				} catch (InterruptedException e) {
