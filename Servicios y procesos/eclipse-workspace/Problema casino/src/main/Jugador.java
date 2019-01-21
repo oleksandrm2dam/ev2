@@ -8,6 +8,7 @@ public abstract class Jugador implements Runnable {
 	protected long saldo;
 	protected boolean apuestaRealizada;
 	protected Random random;
+	protected String nombre;
 	
 	public Jugador(Casino casino, long saldo) {
 		this.casino = casino;
@@ -18,9 +19,13 @@ public abstract class Jugador implements Runnable {
 	
 	@Override
 	public void run() {
-		while(!apuestaRealizada && puedeApostar()) {
-			hacerApuesta();
+		nombre = Thread.currentThread().getName();
+		while(puedeApostar()) {
+			if(!apuestaRealizada) {
+				hacerApuesta();
+			}
 		}
+		System.out.println(Thread.currentThread().getName() + " está en bancarrota!.");
 	}
 	
 	public abstract void comunicarNumero(int numeroGanador);

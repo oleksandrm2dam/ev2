@@ -13,21 +13,25 @@ public class JugadorMartingala extends Jugador {
 	@Override
 	public void comunicarNumero(int numeroGanador) {
 		if(numeroGanador == numeroElegido) {
-			casino.restarSaldo(apuestaAnterior * 36);
-			saldo += apuestaAnterior * 36;
+			long saldoGanadoReal = casino.restarSaldo(apuestaAnterior * 36);
+			saldo += saldoGanadoReal;
+			System.out.println(nombre + " ha ganado " + saldoGanadoReal + "€ eligiendo el número " + numeroElegido + ".");
 			apuestaAnterior = 5;
 		}
 		apuestaRealizada = false;
+		System.out.println("Saldo actual de " + nombre + ": " + saldo + "€.");
 	}
 
 	@Override
 	public void hacerApuesta() {
-		numeroElegido = random.nextInt(36) + 1;
-		casino.sumarSaldo(apuestaAnterior * 2);
-		saldo -= apuestaAnterior * 2;
-		apuestaRealizada = true;
-		casino.aceptarApuesta(this);
-		apuestaAnterior *= 2;
+		if(casino.aceptarApuesta(this)) {
+			numeroElegido = random.nextInt(36) + 1;
+			casino.sumarSaldo(apuestaAnterior * 2);
+			saldo -= apuestaAnterior * 2;
+			apuestaRealizada = true;
+			apuestaAnterior *= 2;
+			System.out.println(nombre + " haciendo apuesta al número " + numeroElegido + " por una cantidad de " + apuestaAnterior + "€.");
+		}
 	}
 
 	@Override

@@ -10,27 +10,39 @@ public class JugadorParImpar extends Jugador {
 
 	@Override
 	public void comunicarNumero(int numeroGanador) {
-		if(numeroGanador % 2 == 0) {
-			if(elegidoPar) {
-				casino.restarSaldo(20);
-				saldo += 20;
-			}
-		} else {
-			if(!elegidoPar) {
-				casino.restarSaldo(20);
-				saldo += 20;
+		if(numeroGanador != 0) {
+			if(numeroGanador % 2 == 0) {
+				if(elegidoPar) {
+					long saldoGanadoReal = casino.restarSaldo(20);
+					saldo += saldoGanadoReal;
+					System.out.println(nombre + " ha ganado " + saldoGanadoReal + "€ eligiendo un número par.");
+				}
+			} else {
+				if(!elegidoPar) {
+					long saldoGanadoReal = casino.restarSaldo(20);
+					saldo += saldoGanadoReal;
+					System.out.println(nombre + " ha ganado " + saldoGanadoReal + "€ eligiendo un número impar.");
+				}
 			}
 		}
 		apuestaRealizada = false;
+		System.out.println("Saldo actual de " + nombre + ": " + saldo + "€.");
 	}
 
 	@Override
 	public void hacerApuesta() {
-		elegidoPar = random.nextBoolean();
-		casino.sumarSaldo(10);
-		saldo -= 10;
-		apuestaRealizada = true;
-		casino.aceptarApuesta(this);
+		if(casino.aceptarApuesta(this)) {
+			elegidoPar = random.nextBoolean();
+			casino.sumarSaldo(10);
+			saldo -= 10;
+			apuestaRealizada = true;
+			
+			if(elegidoPar) {
+				System.out.println(nombre + " haciendo apuesta a números pares por una cantidad de 10€.");
+			} else {
+				System.out.println(nombre + " haciendo apuesta a números impares por una cantidad de 10€.");
+			}
+		}
 	}
 
 	@Override

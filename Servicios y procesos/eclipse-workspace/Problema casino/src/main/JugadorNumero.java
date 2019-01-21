@@ -11,19 +11,24 @@ public class JugadorNumero extends Jugador {
 	@Override
 	public void comunicarNumero(int numeroGanador) {
 		if(numeroGanador == numeroElegido) {
-			casino.restarSaldo(360);
-			saldo += 360;
+			long saldoGanadoReal = casino.restarSaldo(360);
+			saldo += saldoGanadoReal;
+			System.out.println(nombre + " ha ganado " + saldoGanadoReal + "€ eligiendo el número " + numeroElegido + ".");
 		}
 		apuestaRealizada = false;
+		System.out.println("Saldo actual de " + nombre + ": " + saldo + "€.");
 	}
 
 	@Override
 	public void hacerApuesta() {
-		numeroElegido = random.nextInt(36) + 1;
-		casino.sumarSaldo(10);
-		saldo -= 10;
-		apuestaRealizada = true;
-		casino.aceptarApuesta(this);
+		if(casino.aceptarApuesta(this)) {
+			numeroElegido = random.nextInt(36) + 1;
+			casino.sumarSaldo(10);
+			saldo -= 10;
+			apuestaRealizada = true;
+			System.out.println(nombre + " haciendo apuesta al número " + numeroElegido + " por una cantidad de 10€.");
+		}
+		
 	}
 
 	@Override
