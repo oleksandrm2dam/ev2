@@ -3,22 +3,22 @@ package main;
 public class Main {
 
 	public static void main(String[] args) {
-		Ruleta ruleta = new Ruleta(50000);
+		
+		Casino casino = new Casino(50000);
 		
 		for(int i = 0; i < 4; ++i) {
-			ruleta.anadirJugador(new Jugador(1000, ruleta, 1));
+			new Thread(new JugadorNumero(casino, 1000)).start();
 		}
 		
 		for(int i = 0; i < 4; ++i) {
-			ruleta.anadirJugador(new Jugador(1000, ruleta, 2));
+			new Thread(new JugadorParImpar(casino, 1000)).start();
 		}
 		
 		for(int i = 0; i < 4; ++i) {
-			ruleta.anadirJugador(new Jugador(1000, ruleta, 3));
+			new Thread(new JugadorMartingala(casino, 1000)).start();
 		}
 		
-		new Thread(ruleta).start();
-		
+		casino.girarRuleta();
 	}
 
 }

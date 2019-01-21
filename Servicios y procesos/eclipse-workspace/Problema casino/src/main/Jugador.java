@@ -2,37 +2,31 @@ package main;
 
 import java.util.Random;
 
-public class Jugador {
+public abstract class Jugador implements Runnable {
 	
-	private int euros;
-	private Ruleta ruleta;
-	private int tipoJugador;
+	protected Casino casino;
+	protected long saldo;
+	protected boolean apuestaRealizada;
+	protected Random random;
 	
-	public Jugador(int euros, Ruleta ruleta, int tipoJugador) {
-		this.euros = euros;
-		this.ruleta = ruleta;
-		this.tipoJugador = tipoJugador;
+	public Jugador(Casino casino, long saldo) {
+		this.casino = casino;
+		this.saldo = saldo;
+		apuestaRealizada = false;
+		random = new Random();
 	}
 	
-	public void apostar() {
-		switch(tipoJugador) {
-		case 1:
-			ruleta.apostarNumero(this, new Random().nextInt(36) + 1);
-			break;
-		case 2:
-			break;
-		case 3:
-			break;	
+	@Override
+	public void run() {
+		while(!apuestaRealizada && puedeApostar()) {
+			hacerApuesta();
 		}
 	}
 	
-	public int getEuros() {
-		return euros;
-	}
+	public abstract void comunicarNumero(int numeroGanador);
 	
-	public void setEuros(int euros) {
-		this.euros = euros;
-	}
+	public abstract void hacerApuesta();
 	
+	public abstract boolean puedeApostar();
 	
 }
