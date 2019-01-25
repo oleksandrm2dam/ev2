@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void click(View view) {
-        if(button.getText().equals("Guess")) {
+        if(button.getText().toString().toLowerCase().equals("guess")) {
             guess();
         } else {
             resetGame();
@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
             answer = "ERROR: Number format";
         }
         notification = Toast.makeText(this, answer, Toast.LENGTH_LONG);
+        notification.show();
     }
 
     private void resetGame() {
