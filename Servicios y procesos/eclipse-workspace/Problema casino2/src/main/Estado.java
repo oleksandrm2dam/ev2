@@ -1,0 +1,5 @@
+package main;
+
+public enum Estado {
+	INICIO, ACEPTANDO_APUESTAS, RULETA_GIRANDO, PAGANDO_APUESTAS, EN_BANCARROTA
+}
