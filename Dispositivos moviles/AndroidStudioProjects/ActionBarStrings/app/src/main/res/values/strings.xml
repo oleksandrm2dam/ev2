@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">Mi aplicación</string>
+    <string name="app_name">My application</string>
+    <string name="menu_option1">Option 1</string>
+    <string name="menu_option2">Option 2</string>
+    <string name="phone">Phone</string>
+    <string name="camera">Camera</string>
 </resources>

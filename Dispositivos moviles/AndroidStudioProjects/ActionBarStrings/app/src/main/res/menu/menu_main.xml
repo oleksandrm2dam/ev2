@@ -1,0 +1,24 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".MainActivity"
+    xmlns:compat="http://schemas.android.com/apk/res-auto" >
+
+    <item android:id="@+id/option1"
+        android:title="@string/menu_option1"
+        compat:showAsAction="never" />
+
+    <item android:id="@+id/option2"
+        android:title="@string/menu_option2"
+        compat:showAsAction="never" />
+
+    <item android:id="@+id/phone"
+        android:title="@string/phone"
+        compat:showAsAction="always"
+        android:icon="@drawable/phone" />
+
+    <item android:id="@+id/camera"
+        android:title="@string/camera"
+        compat:showAsAction="always"
+        android:icon="@drawable/camera" />
+
+</menu>
