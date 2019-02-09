@@ -15,7 +15,7 @@ public class MineField {
         this.height = height;
         tiles = new Tile[width][height];
         random = new Random();
-        mineChance = 0.3;
+        mineChance = 0.2;
         numberOfMines = 0;
         initTiles();
     }
