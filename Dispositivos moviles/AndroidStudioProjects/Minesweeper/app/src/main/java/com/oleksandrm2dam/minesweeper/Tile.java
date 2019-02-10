@@ -5,12 +5,14 @@ public class Tile {
     private boolean hasMine;
     private boolean isChecked;
     private boolean isFlagged;
+    private boolean checkedAround;
     private int numberOfMinesAround;
 
     public Tile() {
         hasMine = false;
         isChecked = false;
         isFlagged = false;
+        checkedAround = false;
         numberOfMinesAround = 0;
     }
 
@@ -44,5 +46,17 @@ public class Tile {
 
     public void setNumberOfMinesAround(int numberOfMinesAround) {
         this.numberOfMinesAround = numberOfMinesAround;
+    }
+
+    public boolean isHasMine() {
+        return hasMine;
+    }
+
+    public boolean isCheckedAround() {
+        return checkedAround;
+    }
+
+    public void setCheckedAround(boolean checkedAround) {
+        this.checkedAround = checkedAround;
     }
 }

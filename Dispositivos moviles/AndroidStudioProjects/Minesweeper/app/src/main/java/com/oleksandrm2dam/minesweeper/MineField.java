@@ -9,6 +9,7 @@ public class MineField {
     private Random random;
     private double mineChance;
     private int numberOfMines;
+    private int numCheckedTiles;
 
     public MineField(int width, int height) {
         this.width = width;
@@ -17,6 +18,7 @@ public class MineField {
         random = new Random();
         mineChance = 0.2;
         numberOfMines = 0;
+        numCheckedTiles = 0;
         initTiles();
     }
 
@@ -27,6 +29,7 @@ public class MineField {
         random = new Random();
         this.mineChance = mineChance;
         numberOfMines = 0;
+        numCheckedTiles = 0;
         initTiles();
     }
 
@@ -61,6 +64,24 @@ public class MineField {
             }
         }
         tiles[tileI][tileJ].setNumberOfMinesAround(count);
+    }
+
+    public void checkEmptyTile(int tileI, int tileJ) {
+        for(int i = tileI - 1; i <= tileI + 1; ++i) {
+            for(int j = tileJ - 1; j <= tileJ + 1; ++j) {
+                if(i >= 0 && i < width && j >= 0 && j < height) {
+                    if(!tiles[i][j].isChecked()) {
+                        tiles[i][j].setChecked(true);
+                        ++numCheckedTiles;
+                        if(tiles[i][j].getNumberOfMinesAround() == 0
+                                && !tiles[i][j].isCheckedAround()) {
+                            tiles[i][j].setCheckedAround(true);
+                            checkEmptyTile(i, j);
+                        }
+                    }
+                }
+            }
+        }
     }
 
     public int getWidth() {
@@ -109,5 +130,13 @@ public class MineField {
 
     public void setNumberOfMines(int numberOfMines) {
         this.numberOfMines = numberOfMines;
+    }
+
+    public int getNumCheckedTiles() {
+        return numCheckedTiles;
+    }
+
+    public void setNumCheckedTiles(int numCheckedTiles) {
+        this.numCheckedTiles = numCheckedTiles;
     }
 }
