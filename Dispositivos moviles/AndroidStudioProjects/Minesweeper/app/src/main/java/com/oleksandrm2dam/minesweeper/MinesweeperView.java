@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 public class MinesweeperView extends View {
 
@@ -19,13 +20,18 @@ public class MinesweeperView extends View {
             paintBgFlagged;
 
     private long lastActionDown;
-    private final static long LONG_CLICK_TIME = 300;
+    private final static long LONG_CLICK_TIME = 200;
     private int numFlaggedTiles;
+
+    private boolean gameOver;
+    private boolean gameWon;
 
     public MinesweeperView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mineField = new MineField(18, 18);
+        mineField = new MineField(9, 9);
         numFlaggedTiles = 0;
+        gameOver = false;
+        gameWon = false;
         initPaints();
     }
 
@@ -72,6 +78,7 @@ public class MinesweeperView extends View {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+        if(gameOver || gameWon) return false;
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 lastActionDown = event.getDownTime();
@@ -105,8 +112,8 @@ public class MinesweeperView extends View {
             if(clickedTile.getNumberOfMinesAround() == 0) {
                 mineField.checkEmptyTile(i, j);
             }
-            if(mineField.getNumCheckedTiles() + mineField.getNumberOfMines()
-            == mineField.getWidth() * mineField.getHeight()) {
+            if(mineField.getNumCheckedTiles() == mineField.getTotalNumTiles()
+                    - mineField.getNumberOfMines()) {
                 winGame();
             }
         }
@@ -130,11 +137,20 @@ public class MinesweeperView extends View {
     }
 
     private void bombClick() {
-        System.out.println("BOOM!");
+        for(int i = 0; i < mineField.getWidth(); ++i) {
+            for(int j = 0; j < mineField.getHeight(); ++j) {
+                if(mineField.getTiles()[i][j].hasMine()) {
+                    mineField.getTiles()[i][j].setChecked(true);
+                }
+            }
+        }
+        gameOver = true;
+        Toast.makeText(this.getContext(), R.string.game_over, Toast.LENGTH_LONG).show();
     }
 
     private void winGame() {
-        System.out.println("YOU WON!");
+        gameWon = true;
+        Toast.makeText(this.getContext(), R.string.game_won, Toast.LENGTH_LONG).show();
     }
 
     private void drawTiles(Canvas canvas) {

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Minesweeper</string>
+    <string name="continue_game">Continue Game</string>
+    <string name="new_game">New Game</string>
+    <string name="options">Options</string>
+    <string name="about">About</string>
+    <string name="exit">Exit</string>
+    <string name="game_over" translatable="false">BOOOOOM</string>
+    <string name="game_won">COMPLETED!</string>
 </resources>

@@ -10,6 +10,7 @@ public class MineField {
     private double mineChance;
     private int numberOfMines;
     private int numCheckedTiles;
+    private int totalNumTiles;
 
     public MineField(int width, int height) {
         this.width = width;
@@ -19,18 +20,13 @@ public class MineField {
         mineChance = 0.2;
         numberOfMines = 0;
         numCheckedTiles = 0;
+        totalNumTiles = width * height;
         initTiles();
     }
 
     public MineField(int width, int height, double mineChance) {
-        this.width = width;
-        this.height = height;
-        tiles = new Tile[width][height];
-        random = new Random();
+        this(width, height);
         this.mineChance = mineChance;
-        numberOfMines = 0;
-        numCheckedTiles = 0;
-        initTiles();
     }
 
     private void initTiles() {
@@ -138,5 +134,9 @@ public class MineField {
 
     public void setNumCheckedTiles(int numCheckedTiles) {
         this.numCheckedTiles = numCheckedTiles;
+    }
+
+    public int getTotalNumTiles() {
+        return totalNumTiles;
     }
 }

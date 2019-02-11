@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Buscaminas</string>
+    <string name="continue_game">Continuar partida</string>
+    <string name="new_game">Nueva partida</string>
+    <string name="options">Opciones</string>
+    <string name="about">Acerca de</string>
+    <string name="exit">Salir</string>
+    <string name="game_won">¡COMPLETADO!</string>
+</resources>
