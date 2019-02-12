@@ -7,4 +7,7 @@
     <string name="about">Acerca de</string>
     <string name="exit">Salir</string>
     <string name="game_won">¡COMPLETADO!</string>
+    <string name="menu_restart_game">Reiniciar partida</string>
+    <string name="change_lenguage">Cambiar idioma</string>
+    <string name="go_to_menu">Ir al menú</string>
 </resources>

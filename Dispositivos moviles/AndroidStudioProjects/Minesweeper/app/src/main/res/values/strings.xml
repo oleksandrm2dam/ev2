@@ -7,4 +7,7 @@
     <string name="exit">Exit</string>
     <string name="game_over" translatable="false">BOOOOOM</string>
     <string name="game_won">COMPLETED!</string>
+    <string name="menu_restart_game">Restart game</string>
+    <string name="change_lenguage">Change lenguage</string>
+    <string name="go_to_menu">Go to menu</string>
 </resources>

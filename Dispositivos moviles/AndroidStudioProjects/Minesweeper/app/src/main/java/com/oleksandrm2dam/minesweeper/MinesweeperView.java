@@ -28,11 +28,29 @@ public class MinesweeperView extends View {
 
     public MinesweeperView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mineField = new MineField(9, 9);
+        initPaints();
+    }
+
+    public void startNewGame(int width, int height) {
+        mineField = new MineField(width, height);
         numFlaggedTiles = 0;
         gameOver = false;
         gameWon = false;
-        initPaints();
+        invalidate();
+    }
+
+    public void restartGame() {
+        for(int i = 0; i < mineField.getWidth(); ++i) {
+            for(int j = 0; j < mineField.getHeight(); ++j) {
+                mineField.getTiles()[i][j].setChecked(false);
+                mineField.getTiles()[i][j].setFlagged(false);
+            }
+        }
+        mineField.setNumCheckedTiles(0);
+        numFlaggedTiles = 0;
+        gameOver = false;
+        gameWon = false;
+        invalidate();
     }
 
     private void initPaints() {
