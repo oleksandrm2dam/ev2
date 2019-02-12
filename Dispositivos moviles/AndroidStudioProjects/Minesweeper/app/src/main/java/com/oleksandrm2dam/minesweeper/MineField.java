@@ -7,36 +7,35 @@ public class MineField {
     private int width, height;
     private Tile[][] tiles;
     private Random random;
-    private double mineChance;
     private int numberOfMines;
     private int numCheckedTiles;
     private int totalNumTiles;
 
-    public MineField(int width, int height) {
+    public MineField(int width, int height, int numberOfMines) {
         this.width = width;
         this.height = height;
         tiles = new Tile[width][height];
         random = new Random();
-        mineChance = 0.2;
-        numberOfMines = 0;
+        this.numberOfMines = numberOfMines;
         numCheckedTiles = 0;
         totalNumTiles = width * height;
         initTiles();
-    }
-
-    public MineField(int width, int height, double mineChance) {
-        this(width, height);
-        this.mineChance = mineChance;
     }
 
     private void initTiles() {
         for(int i = 0; i < width; ++i) {
             for(int j = 0; j < height; ++j) {
                 tiles[i][j] = new Tile();
-                if(random.nextDouble() <= mineChance) {
-                    tiles[i][j].setHasMine(true);
-                    ++numberOfMines;
-                }
+            }
+        }
+        int currentNumMines = 0;
+        while(currentNumMines < numberOfMines) {
+            int newMine = random.nextInt(totalNumTiles);
+            int i = newMine % width;
+            int j = newMine / width;
+            if(!tiles[i][j].hasMine()) {
+                tiles[i][j].setHasMine(true);
+                ++currentNumMines;
             }
         }
         for(int i = 0; i < width; ++i) {
@@ -110,14 +109,6 @@ public class MineField {
 
     public void setRandom(Random random) {
         this.random = random;
-    }
-
-    public double getMineChance() {
-        return mineChance;
-    }
-
-    public void setMineChance(double mineChance) {
-        this.mineChance = mineChance;
     }
 
     public int getNumberOfMines() {

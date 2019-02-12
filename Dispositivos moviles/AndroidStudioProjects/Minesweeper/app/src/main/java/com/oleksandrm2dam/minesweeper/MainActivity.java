@@ -15,7 +15,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         buttonContinueGame = findViewById(R.id.buttonContinueGame);
-
     }
 
     public void continueGame(View view) {
@@ -24,11 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void newGame(View view) {
         Intent gameActivity = new Intent(this, GameActivity.class);
+        gameActivity.putExtra("width", 9);
+        gameActivity.putExtra("height", 9);
+        gameActivity.putExtra("numMines", 10);
         startActivity(gameActivity);
     }
 
     public void options(View view) {
-        finish();
+        Intent optionsActivity = new Intent(this, OptionsActivity.class);
+        startActivity(optionsActivity);
     }
 
     public void about(View view) {

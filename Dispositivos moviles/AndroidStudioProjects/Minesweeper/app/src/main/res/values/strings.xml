@@ -10,4 +10,13 @@
     <string name="menu_restart_game">Restart game</string>
     <string name="change_lenguage">Change lenguage</string>
     <string name="go_to_menu">Go to menu</string>
+    <string name="language">Language</string>
+    <string name="lang_spanish" translatable="false">Español</string>
+    <string name="lang_english" translatable="false">English</string>
+    <string name="lang_russian" translatable="false">Русский</string>
+    <string-array name="languages">
+        <item>@string/lang_english</item>
+        <item>@string/lang_spanish</item>
+        <item>@string/lang_russian</item>
+    </string-array>
 </resources>

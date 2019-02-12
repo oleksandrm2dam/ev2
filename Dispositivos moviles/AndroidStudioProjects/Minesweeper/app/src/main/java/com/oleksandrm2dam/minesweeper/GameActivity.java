@@ -8,7 +8,7 @@ import android.view.MenuItem;
 public class GameActivity extends AppCompatActivity {
 
     private MinesweeperView minesweeperView;
-    private int width, height;
+    private int width, height, numMines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -16,13 +16,12 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.activity_game);
 
         Bundle bundle = getIntent().getExtras();
-        //width = bundle.getInt("width");
-        //height = bundle.getInt("height");
-        width = 9;
-        height = 9;
+        width = bundle.getInt("width");
+        height = bundle.getInt("height");
+        numMines = bundle.getInt("numMines");
 
         minesweeperView = findViewById(R.id.minesweeperView);
-        minesweeperView.startNewGame(width, height);
+        minesweeperView.startNewGame(width, height, numMines);
     }
 
     @Override
@@ -35,7 +34,7 @@ public class GameActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case R.id.new_game:
-                minesweeperView.startNewGame(width, height);
+                minesweeperView.startNewGame(width, height, numMines);
                 return true;
             case R.id.restart_game:
                 minesweeperView.restartGame();

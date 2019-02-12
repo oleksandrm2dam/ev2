@@ -31,8 +31,8 @@ public class MinesweeperView extends View {
         initPaints();
     }
 
-    public void startNewGame(int width, int height) {
-        mineField = new MineField(width, height);
+    public void startNewGame(int width, int height, int numMines) {
+        mineField = new MineField(width, height, numMines);
         numFlaggedTiles = 0;
         gameOver = false;
         gameWon = false;
@@ -84,7 +84,11 @@ public class MinesweeperView extends View {
     @Override
     public void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        tileSize = w / mineField.getWidth();
+        if(w < h) {
+            tileSize = w / mineField.getWidth();
+        } else {
+            tileSize = h / mineField.getWidth();
+        }
         halfTileSize = tileSize / 2F;
     }
 
