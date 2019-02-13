@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">My application</string>
-    <string name="menu_option1">Option 1</string>
-    <string name="menu_option2">Option 2</string>
+    <string name="spanish">Spanish</string>
+    <string name="english">English</string>
     <string name="phone">Phone</string>
     <string name="camera">Camera</string>
+    <string name="show_action_bar">Show action bar</string>
+    <string name="hide_action_bar">Hide action bar</string>
 </resources>
