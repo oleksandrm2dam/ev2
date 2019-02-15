@@ -15,6 +15,7 @@ public class MinesweeperView extends View {
 
     private int tileSize;
     private float halfTileSize;
+    private float quarterTileSize;
 
     private Paint paintNumber, paintBgUnchecked, paintBgChecked, paintBorder, paintBomb,
             paintBgFlagged;
@@ -44,6 +45,7 @@ public class MinesweeperView extends View {
             for(int j = 0; j < mineField.getHeight(); ++j) {
                 mineField.getTiles()[i][j].setChecked(false);
                 mineField.getTiles()[i][j].setFlagged(false);
+                mineField.getTiles()[i][j].setCheckedAround(false);
             }
         }
         mineField.setNumCheckedTiles(0);
@@ -68,7 +70,6 @@ public class MinesweeperView extends View {
 
         paintNumber = new Paint(Paint.ANTI_ALIAS_FLAG);
         paintNumber.setColor(Color.RED);
-        paintNumber.setTextSize(75);
         paintNumber.setStyle(Paint.Style.FILL);
         paintNumber.setTextAlign(Paint.Align.CENTER);
 
@@ -90,6 +91,8 @@ public class MinesweeperView extends View {
             tileSize = h / mineField.getWidth();
         }
         halfTileSize = tileSize / 2F;
+        quarterTileSize = tileSize / 4F;
+        paintNumber.setTextSize(halfTileSize);
     }
 
     @Override
@@ -190,7 +193,7 @@ public class MinesweeperView extends View {
                         // Draw number
                         paintNumber.setColor(getNumberColor(mineField.getTiles()[i][j]));
                         canvas.drawText(Integer.toString(mineField.getTiles()[i][j].getNumberOfMinesAround()),
-                                i * tileSize + halfTileSize, j * tileSize + tileSize, paintNumber);
+                                i * tileSize + halfTileSize, j * tileSize + tileSize - quarterTileSize, paintNumber);
                     }
                 } else {
                     if(mineField.getTiles()[i][j].isFlagged()) {
