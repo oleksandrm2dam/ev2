@@ -9,12 +9,16 @@ import android.widget.Button;
 public class MainActivity extends AppCompatActivity {
 
     private Button buttonContinueGame;
+    private int optWidth, optHeight, optNumMines;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         buttonContinueGame = findViewById(R.id.buttonContinueGame);
+        setOptHeight(9);
+        setOptWidth(9);
+        setOptNumMines(10);
     }
 
     public void continueGame(View view) {
@@ -23,14 +27,15 @@ public class MainActivity extends AppCompatActivity {
 
     public void newGame(View view) {
         Intent gameActivity = new Intent(this, GameActivity.class);
-        gameActivity.putExtra("width", 9);
-        gameActivity.putExtra("height", 9);
-        gameActivity.putExtra("numMines", 10);
+        gameActivity.putExtra("width", optWidth);
+        gameActivity.putExtra("height", optHeight);
+        gameActivity.putExtra("numMines", optNumMines);
         startActivity(gameActivity);
     }
 
     public void options(View view) {
         Intent optionsActivity = new Intent(this, OptionsActivity.class);
+        optionsActivity.putExtra("width", optWidth);
         startActivity(optionsActivity);
     }
 
@@ -42,4 +47,27 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
+    public int getOptWidth() {
+        return optWidth;
+    }
+
+    public void setOptWidth(int optWidth) {
+        this.optWidth = optWidth;
+    }
+
+    public int getOptHeight() {
+        return optHeight;
+    }
+
+    public void setOptHeight(int optHeight) {
+        this.optHeight = optHeight;
+    }
+
+    public int getOptNumMines() {
+        return optNumMines;
+    }
+
+    public void setOptNumMines(int optNumMines) {
+        this.optNumMines = optNumMines;
+    }
 }

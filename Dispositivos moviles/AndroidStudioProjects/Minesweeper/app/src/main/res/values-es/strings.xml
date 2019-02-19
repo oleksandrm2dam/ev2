@@ -11,4 +11,8 @@
     <string name="change_lenguage">Cambiar idioma</string>
     <string name="go_to_menu">Ir al menú</string>
     <string name="language">Idioma</string>
+    <string name="dif_normal">Normal (9x9, 10 minas)</string>
+    <string name="dif_hard">Dificil (15x15, 20 minas)</string>
+    <string name="dif_very_hard">Muy dificil (18x18, 30 minas)</string>
+    <string name="dif">Dificultad</string>
 </resources>

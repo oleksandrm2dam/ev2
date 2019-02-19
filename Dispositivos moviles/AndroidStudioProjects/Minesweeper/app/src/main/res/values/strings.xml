@@ -14,9 +14,13 @@
     <string name="lang_spanish" translatable="false">Español</string>
     <string name="lang_english" translatable="false">English</string>
     <string name="lang_russian" translatable="false">Русский</string>
-    <string-array name="languages">
+    <string-array name="lang_array">
         <item>@string/lang_english</item>
         <item>@string/lang_spanish</item>
         <item>@string/lang_russian</item>
     </string-array>
+    <string name="dif_normal">Normal (9x9, 10 mines)</string>
+    <string name="dif_hard">Hard (15x15, 20 mines)</string>
+    <string name="dif_very_hard">Very hard (18x18, 30 mines)</string>
+    <string name="dif">Difficulty</string>
 </resources>
