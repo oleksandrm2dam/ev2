@@ -174,6 +174,13 @@ public class MinesweeperView extends View {
     }
 
     private void winGame() {
+        for(int i = 0; i < mineField.getWidth(); ++i) {
+            for(int j = 0; j < mineField.getHeight(); ++j) {
+                if(mineField.getTiles()[i][j].hasMine()) {
+                    mineField.getTiles()[i][j].setFlagged(true);
+                }
+            }
+        }
         gameWon = true;
         Toast.makeText(this.getContext(), R.string.game_won, Toast.LENGTH_LONG).show();
     }
