@@ -4,10 +4,17 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Chronometer;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.Context.VIBRATOR_SERVICE;
 
 public class MinesweeperView extends View {
 
@@ -26,6 +33,9 @@ public class MinesweeperView extends View {
 
     private boolean gameOver;
     private boolean gameWon;
+
+    private Chronometer chronometer;
+    private TextView flagCounter;
 
     public MinesweeperView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -85,11 +95,7 @@ public class MinesweeperView extends View {
     @Override
     public void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        if(w < h) {
-            tileSize = w / mineField.getWidth();
-        } else {
-            tileSize = h / mineField.getWidth();
-        }
+        tileSize = w / mineField.getWidth();
         halfTileSize = tileSize / 2F;
         quarterTileSize = tileSize / 4F;
         paintNumber.setTextSize(halfTileSize);
@@ -152,16 +158,18 @@ public class MinesweeperView extends View {
                 clickedTile.setFlagged(false);
                 --numFlaggedTiles;
             } else {
-                if(numFlaggedTiles < mineField.getNumberOfMines()) {
-                    clickedTile.setFlagged(true);
-                    ++numFlaggedTiles;
-                }
+                clickedTile.setFlagged(true);
+                ++numFlaggedTiles;
             }
+            vibrate(50);
+            updateFlagCounter();
             invalidate();
         }
     }
 
     private void bombClick() {
+        vibrate(500);
+        chronometer.stop();
         for(int i = 0; i < mineField.getWidth(); ++i) {
             for(int j = 0; j < mineField.getHeight(); ++j) {
                 if(mineField.getTiles()[i][j].hasMine()) {
@@ -174,14 +182,19 @@ public class MinesweeperView extends View {
     }
 
     private void winGame() {
+        chronometer.stop();
         for(int i = 0; i < mineField.getWidth(); ++i) {
             for(int j = 0; j < mineField.getHeight(); ++j) {
                 if(mineField.getTiles()[i][j].hasMine()) {
-                    mineField.getTiles()[i][j].setFlagged(true);
+                    if(!mineField.getTiles()[i][j].isFlagged()) {
+                        ++numFlaggedTiles;
+                        mineField.getTiles()[i][j].setFlagged(true);
+                    }
                 }
             }
         }
         gameWon = true;
+        updateFlagCounter();
         Toast.makeText(this.getContext(), R.string.game_won, Toast.LENGTH_LONG).show();
     }
 
@@ -243,4 +256,24 @@ public class MinesweeperView extends View {
         }
     }
 
+    public void setChronometer(Chronometer chronometer) {
+        this.chronometer = chronometer;
+    }
+
+    public void setFlagCounter(TextView textView) {
+        flagCounter = textView;
+    }
+
+    public void updateFlagCounter() {
+        flagCounter.setText(getContext().getString(R.string.mines_left) + (mineField.getNumberOfMines() - numFlaggedTiles));
+    }
+
+    private void vibrate(long ms) {
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) getContext().getSystemService(VIBRATOR_SERVICE)).vibrate(
+                    VibrationEffect.createOneShot(ms, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            ((Vibrator) getContext().getSystemService(VIBRATOR_SERVICE)).vibrate(ms);
+        }
+    }
 }

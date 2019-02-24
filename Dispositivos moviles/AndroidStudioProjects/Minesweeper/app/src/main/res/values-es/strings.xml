@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Buscaminas</string>
-    <string name="continue_game">Continuar partida</string>
     <string name="new_game">Nueva partida</string>
     <string name="options">Opciones</string>
     <string name="about">Acerca de</string>
@@ -15,4 +14,7 @@
     <string name="dif_hard">Dificil (15x15, 20 minas)</string>
     <string name="dif_very_hard">Muy dificil (18x18, 30 minas)</string>
     <string name="dif">Dificultad</string>
+    <string name="mines_left">"Minas restantes: "</string>
+    <string name="about_version">Versión: 1.0</string>
+    <string name="about_author">Autor: Oleksandr Malyga</string>
 </resources>

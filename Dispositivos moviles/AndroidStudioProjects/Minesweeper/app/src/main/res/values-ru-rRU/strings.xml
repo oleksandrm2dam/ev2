@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Сапёр</string>
+    <string name="new_game">Новая игра</string>
+    <string name="options">Настройки</string>
+    <string name="about">Про программу</string>
+    <string name="exit">Выйти</string>
+    <string name="game_won">Завершено!</string>
+    <string name="menu_restart_game">Перезапустить игру</string>
+    <string name="change_lenguage">Поменять язык</string>
+    <string name="go_to_menu">Выйти на меню</string>
+    <string name="language">Язык</string>
+    <string name="dif_normal">Нормальная (9x9, 10 мин)</string>
+    <string name="dif_hard">Трудная (15x15, 20 мин)</string>
+    <string name="dif_very_hard">Очень трудная (18x18, 30 мин)</string>
+    <string name="dif">Сложность</string>
+    <string name="mines_left">"Осталось мин: "</string>
+    <string name="about_version">Версия: 1.0</string>
+    <string name="about_author">Автор: Александр Малыга</string>
+</resources>

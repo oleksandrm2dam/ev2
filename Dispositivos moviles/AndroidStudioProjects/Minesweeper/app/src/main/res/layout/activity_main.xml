@@ -26,16 +26,6 @@
             android:gravity="center" />
 
         <Button
-            android:id="@+id/buttonContinueGame"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:enabled="false"
-            android:onClick="continueGame"
-            android:text="@string/continue_game"
-            android:textSize="18sp" />
-
-        <Button
             android:id="@+id/buttonNewGame"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
