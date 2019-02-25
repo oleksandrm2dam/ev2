@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -27,6 +29,8 @@ public class MinesweeperView extends View {
     private Paint paintNumber, paintBgUnchecked, paintBgChecked, paintBorder, paintBomb,
             paintBgFlagged;
 
+    private Drawable mineImage, flagImage;
+
     private long lastActionDown;
     private final static long LONG_CLICK_TIME = 200;
     private int numFlaggedTiles;
@@ -40,6 +44,8 @@ public class MinesweeperView extends View {
     public MinesweeperView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initPaints();
+        mineImage = context.getResources().getDrawable(R.drawable.mine);
+        flagImage = context.getResources().getDrawable(R.drawable.flag);
     }
 
     public void startNewGame(int width, int height, int numMines) {
@@ -82,6 +88,7 @@ public class MinesweeperView extends View {
         paintNumber.setColor(Color.RED);
         paintNumber.setStyle(Paint.Style.FILL);
         paintNumber.setTextAlign(Paint.Align.CENTER);
+        paintNumber.setTypeface(Typeface.DEFAULT_BOLD);
 
         paintBomb = new Paint(Paint.ANTI_ALIAS_FLAG);
         paintBomb.setColor(Color.RED);
@@ -204,8 +211,9 @@ public class MinesweeperView extends View {
                 if(mineField.getTiles()[i][j].isChecked()) {
                     if(mineField.getTiles()[i][j].hasMine()) {
                         // Draw mine
-                        canvas.drawRect(i * tileSize, j * tileSize,
-                                i * tileSize + tileSize, j * tileSize + tileSize, paintBomb);
+                        mineImage.setBounds(i * tileSize, j * tileSize,
+                                i * tileSize + tileSize, j * tileSize + tileSize);
+                        mineImage.draw(canvas);
                     } else {
                         // Draw checked background
                         canvas.drawRect(i * tileSize, j * tileSize,
@@ -220,6 +228,9 @@ public class MinesweeperView extends View {
                         // Draw flagged background
                         canvas.drawRect(i * tileSize, j * tileSize,
                                 i * tileSize + tileSize, j * tileSize + tileSize, paintBgFlagged);
+                        flagImage.setBounds(i * tileSize, j * tileSize,
+                                i * tileSize + tileSize, j * tileSize + tileSize);
+                        flagImage.draw(canvas);
                     } else {
                         // Draw unchecked background
                         canvas.drawRect(i * tileSize, j * tileSize,
