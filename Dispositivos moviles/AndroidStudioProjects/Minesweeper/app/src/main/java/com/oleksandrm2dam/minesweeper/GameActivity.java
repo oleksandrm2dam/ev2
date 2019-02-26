@@ -21,9 +21,28 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
 
-        width = 9;
-        height = 9;
-        numMines = 10;
+        switch(getIntent().getExtras().getInt("difficulty")) {
+            case 1:
+                width = 9;
+                height = 9;
+                numMines = 10;
+                break;
+            case 2:
+                width = 15;
+                height = 15;
+                numMines = 20;
+                break;
+            case 3:
+                width = 18;
+                height = 18;
+                numMines = 30;
+                break;
+            default:
+                width = 9;
+                height = 9;
+                numMines = 10;
+                break;
+        }
 
         minesweeperView = findViewById(R.id.minesweeperView);
         minesweeperView.startNewGame(width, height, numMines);
@@ -59,14 +78,28 @@ public class GameActivity extends AppCompatActivity {
                 chronometer.start();
                 return true;
             case R.id.change_lenguage:
-                startActivity(new Intent(this, OptionsActivity.class));
+                Intent intent = new Intent(this, OptionsActivity.class);
+                intent.putExtra("difficulty", getIntent().getExtras().getInt("difficulty"));
+                startActivity(intent);
+                finish();
                 return true;
             case R.id.go_to_menu:
-                startActivity(new Intent(this, MainActivity.class));
+                intent = new Intent(this, MainActivity.class);
+                intent.putExtra("difficulty", getIntent().getExtras().getInt("difficulty"));
+                startActivity(intent);
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra("difficulty", getIntent().getExtras().getInt("difficulty"));
+        startActivity(intent);
+        finish();
     }
 
 }

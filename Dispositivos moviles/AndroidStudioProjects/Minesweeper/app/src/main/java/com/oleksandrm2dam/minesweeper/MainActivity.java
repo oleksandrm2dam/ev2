@@ -7,19 +7,30 @@ import android.view.View;
 
 public class MainActivity extends AppCompatActivity {
 
+    private int difficulty;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try {
+            difficulty = getIntent().getExtras().getInt("difficulty");
+        } catch (NullPointerException e) {
+            difficulty = 1;
+        }
+
     }
 
     public void newGame(View view) {
         Intent gameActivity = new Intent(this, GameActivity.class);
+        gameActivity.putExtra("difficulty", difficulty);
         startActivity(gameActivity);
     }
 
     public void options(View view) {
         Intent optionsActivity = new Intent(this, OptionsActivity.class);
+        optionsActivity.putExtra("difficulty", difficulty);
         startActivity(optionsActivity);
     }
 
